@@ -65,7 +65,7 @@ trainer_cfg:
   with_test: true
   restore_ckpt_strict: false
   restore_hint: 0
-  save_iter: 500
+  save_iter: 100
   save_name: GaitGraph2
   sync_BN: true
   total_iter: 500
