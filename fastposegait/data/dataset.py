@@ -41,7 +41,7 @@ class DataSet(tordata.Dataset):
                     _ = pickle.load(f)
                 f.close()
             else:
-                continue #mapping.txt
+                continue 
             data_list.append(_)
         
         for idx, data in enumerate(data_list):
@@ -120,15 +120,16 @@ class DataSet(tordata.Dataset):
                             if data_in_use is not None:
                                 seq_dirs = [dir for dir, use_bl in zip(
                                     seq_dirs, data_in_use) if use_bl]
-                            ##Add Threshold for GaitGraph
-                            if data_config['frame_threshold']!=0:
+                            ## Only PKL
+                            seq_dirs = [dir for dir in seq_dirs if dir.endswith('.pkl')]
+                            ## Add Threshold for GaitGraph
+                            if data_config['frame_threshold'] != 0:
                                 frame_threshold = data_config['frame_threshold']
                                 with open(seq_dirs[0], 'rb') as f:
                                     data_check = pickle.load(f)
                                 f.close()
-                                if len(data_check)<frame_threshold +1:
+                                if len(data_check) < frame_threshold + 1:
                                     continue
-                            ##
                             
                             seqs_info_list.append([*seq_info, seq_dirs])
                         else:
