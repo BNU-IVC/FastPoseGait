@@ -83,7 +83,7 @@ def TXT2PKL(dataset_dir,dstdir):
     Convert the txt into PKL
     See the Description above
     '''
-    if dataset_dir.split[-1] == 'probe':
+    if dataset_dir.split("/")[-1] == 'probe':
         id_list = sorted(os.listdir(dataset_dir))
         for id_ in tqdm(id_list):
             path_id = osp.join(dataset_dir,id_)
@@ -134,10 +134,10 @@ def TXT2PKL(dataset_dir,dstdir):
                     continue
                 keypoints = np.stack(frame_list)
                 ##dst path elements
-                if dataset_dir.split[-1] == 'train':
+                if dataset_dir.split("/")[-1] == 'train':
                     id_type = id_ + 'train'
                     index = '00'
-                elif dataset_dir.split[-1] == 'gallery':
+                elif dataset_dir.split("/")[-1] == 'gallery':
                     id_type = id_
                     index_int = index_int + 1
                     index = str(index_int).zfill(2)
