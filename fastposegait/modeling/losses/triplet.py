@@ -29,18 +29,19 @@ class TripletLoss(BaseLoss):
         return loss_return, self.info
 
     def batch_hard_triplet_loss(self,ap_dist,an_dist,dist):
-        #largest d(a,p)
+        # largest d(a,p)
         ap_dist = ap_dist.max(-2)[0].view(dist.size(0),dist.size(1)) # [p,n]
         # smallest d(a,n)
         an_dist = an_dist.min(-1)[0].view(dist.size(0),dist.size(1)) #[p,n]
         # [d(a,p)- d(a,n) + margin]+
         loss = F.relu((ap_dist-an_dist + self.margin)) #[p,n]
 
-        hard_loss = torch.mean(loss,-1) #[p]
+        hard_loss, _ = self.AvgNonZeroReducer(loss) #[p]
 
         self.info.update({
             'hard_loss': hard_loss.detach().clone()})
-        return loss
+        return hard_loss
+
     def batch_all_triplet_loss(self,ap_dist,an_dist,dist):
         mean_dist = dist.mean((1, 2))  # [p]
         dist_diff = (ap_dist - an_dist).view(dist.size(0), -1)
