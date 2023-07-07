@@ -140,12 +140,14 @@ class JointNoise(object):
 
 
 class GaitTR_MultiInput(object):
-    def __init__(self, joint_format='coco',):
+    def __init__(self, joint_format='coco'):
+
         if joint_format == 'coco':
             self.connect_joint = np.array([5,0,0,1,2,0,0,5,6,7,8,5,6,11,12,13,14])
+            self.center = 0
         elif joint_format in ['alphapose', 'openpose']:
             self.connect_joint = np.array([1,1,1,2,3,1,5,6,2,8,9,5,11,12,0,0,14,15])
-
+            self.center = 1
 
     def __call__(self, data):
         # (C, T, V) -> (I, C * 2, T, V)
@@ -158,7 +160,7 @@ class GaitTR_MultiInput(object):
         # Joints
         data_new[0, :C, :, :] = data
         for i in range(V):
-            data_new[1, :, :, i] = data[:, :, i] - data[:, :, 0]
+            data_new[1, :, :, i] = data[:, :, i] - data[:, :, self.center]
         # Velocity
         for i in range(T - 2):
             data_new[2, :, i, :] = data[:, i + 1, :] - data[:, i, :]
@@ -176,12 +178,14 @@ class GaitTR_MultiInput(object):
 
 
 class GaitGraph_MultiInput(object):
-    def __init__(self, center=0, joint_format='coco'):
-        self.center = center
+    def __init__(self, joint_format='coco'):
+        
         if joint_format == 'coco':
             self.connect_joint = np.array([5,0,0,1,2,0,0,5,6,7,8,5,6,11,12,13,14])
+            self.center = 0
         elif joint_format in ['alphapose', 'openpose']:
             self.connect_joint = np.array([1,1,1,2,3,1,5,6,2,8,9,5,11,12,0,0,14,15])
+            self.center = 1
 
     def __call__(self, data):
         T, V, C = data.shape
