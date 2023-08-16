@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import logging
-from .units import UnitConv2D, STModule
+from .units import UnitConv2D, STModule,PAGCN
 from .units.unit_tcn import Temporal_Basic_Block, Temporal_Bottleneck_Block
 from .units.unit_sgcn import Spatial_Basic_Block, Spatial_Bottleneck_Block
 
