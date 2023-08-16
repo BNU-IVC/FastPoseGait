@@ -9,12 +9,13 @@ The code of [GPGait: Generalized Pose-based Gait Recognition (ICCV2023)](https:/
 ## Supports
 
 ### Supported Algorithms
+- [x] [GPGait(ICCV2023)](https://arxiv.org/abs/2303.05234)
+
 - [x] [GaitTR(Arxiv2022)](https://arxiv.org/abs/2204.03873)
 
 - [x] [GaitGraph2(CVPRW2022)](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)
 
 - [x] [GaitGraph1(ICIP2021)](https://ieeexplore.ieee.org/document/9506717)
-- [x] [GPGait(ICCV2023)](https://arxiv.org/abs/2303.05234)
 
 ### Supported Datasets
 
