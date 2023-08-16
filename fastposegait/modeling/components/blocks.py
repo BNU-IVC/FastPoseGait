@@ -94,3 +94,26 @@ class ResGCN_Module(nn.Module):
     def forward(self, x, A):
         A = A.cuda(x.get_device())
         return self.tcn(self.scn(x, A*self.edge), self.residual(x))
+
+
+class Part_AGCN_Residual(nn.Module):
+    '''
+    Block of GPGait: https://arxiv.org/abs/2303.05234
+    '''
+    def __init__(self,in_channels,out_channels,A,joint_format='coco'):
+        super(Part_AGCN_Residual,self).__init__()
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+        self.A = A
+        self.asg = PAGCN(in_channels=self.in_channels,out_channels=self.out_channels,A=self.A,joint_format=joint_format)
+        if (in_channels != out_channels):
+            self.residual_s = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, 1),
+                nn.BatchNorm2d(out_channels),
+            )
+        else:
+            self.residual_s = lambda x: x
+
+    def forward(self, x, A, part=None):
+        x = self.asg(x, A, part) + self.residual_s(x)
+        return x
