@@ -2,7 +2,7 @@
 
 ##  [CASIA-B](https://ieeexplore.ieee.org/abstract/document/1699873/)
 |                       Model            |  Pose Estimator             |  Rank-1 NM  |  Rank-1 BG  |  Rank-1 CL  | Rank-1 Mean      |
-| :------------------------------------------------: | :---------: | :---------: | :---------: | :---------: | ------------ |
+| :------------------------------------------------: | :---------: | :---------: | :---------: | :---------: | :------------: |
 |                   [GaitGraph1](https://ieeexplore.ieee.org/document/9506717)              | HRNet     | 86.37 (87.7) | 76.50 (74.8) | 65.24 (66.3) | 76.04 (76.27) |
 | [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)  |HRNet | 80.58 (82.0) | 72.14 (73.2) | 65.26 (63.6) | 72.66 (72.93) |
 |                     [GaitTR](https://arxiv.org/abs/2204.03873)   |        SimCC           |      94.91 (96.0) | 88.82 (91.3) | 90.34 (90.0) | 91.35 (92.4)          |
