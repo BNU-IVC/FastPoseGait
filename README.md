@@ -62,13 +62,15 @@ pip install pytorch_metric_learning
 ```
 
 #### 2. Data Preparation
-
-* To obtain the human keypoints annotations, you can apply for it:
+* CASIA-B Pose can be downloaded from [this link](https://www.scidb.cn/en/detail?dataSetId=8ec62efd66a544939e821edeccc1f35c).
+* Or to obtain the official human keypoint annotations, you can apply for it:
   * [CASIA-B official site](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp)
   * [OUMVLP-Pose official site](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitLPPose.html)
   * [GREW official site](https://www.grew-benchmark.org/download.html)
   * [Gait3D official site](https://gait3d.github.io/#dataset)
 * Suppose you have downloaded the official annotations, you need to use our [provided script](docs/process_dataset.md)  to generate the processed pickle files.
+
+
 
 #### 3. Training & Testing
 
