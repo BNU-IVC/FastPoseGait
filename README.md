@@ -6,7 +6,7 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 
 ## News!
 
-* [Aug 2023]  The official PyTorch implementation of <i>GPGait: Generalized Pose-based Gait Recognition</i> is released！Checkout [code](configs/gpgait/README.md.md).
+* [Aug 2023]  The official PyTorch implementation of <i>GPGait: Generalized Pose-based Gait Recognition</i> is released！Checkout [code](configs/gpgait/README.md).
 * [July 2023] Our paper [GPGait: Generalized Pose-based Gait Recognition](https://arxiv.org/abs/2303.05234) has been accepted by ICCV 2023!
 
 ## Supports
