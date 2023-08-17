@@ -4,7 +4,10 @@
 **FastPoseGait** is a user-friendly and flexible repository that aims to help researchers get started on **pose-based gait recognition** quickly. Just the pre-beta version is released now, and an enhanced version as well as a technical report will be released as soon as possible.
 This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
-The code of [GPGait: Generalized Pose-based Gait Recognition (ICCV2023)](https://arxiv.org/abs/2303.05234) is released.
+## News!
+
+* [Aug 2023]  The official PyTorch implementation of <i>GPGait: Generalized Pose-based Gait Recognition</i> is released！Checkout [code](configs/gpgait/README.md.md).
+* [July 2023] Our paper [GPGait: Generalized Pose-based Gait Recognition](https://arxiv.org/abs/2303.05234) has been accepted by ICCV 2023!
 
 ## Supports
 
