@@ -15,7 +15,7 @@ export MASTER_PORT=$((12000 + $RANDOM % 20000))
 # CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --master_port=$MASTER_PORT --nproc_per_node=4 fastposegait/main.py --cfgs ./configs/gaittr/gaittr.yaml --phase train --log_to_file 
 
 # GPGait
-# CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --master_port=$MASTER_PORT --nproc_per_node=4 fastposegait/main.py --cfgs ./configs/gpgait/gpgait.yaml --phase train --log_to_file 
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --master_port=$MASTER_PORT --nproc_per_node=4 fastposegait/main.py --cfgs ./configs/gpgait/gpgait.yaml --phase train --log_to_file 
 
 # # **************** For OUMVLP ****************
 
