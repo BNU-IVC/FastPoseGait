@@ -1,6 +1,6 @@
 data_cfg:
   dataset_name: CASIA-B
-  dataset_root: /home/mengshibei/workplace/DatasetPose/CASIA-B/CASIA-B_HRNet
+  dataset_root: your_path
   dataset_partition: ./datasets/CASIA-B/CASIA-B.json
   test_dataset_name: CASIA-B
   num_workers: 0
