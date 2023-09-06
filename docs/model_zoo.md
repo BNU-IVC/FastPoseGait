@@ -1,17 +1,22 @@
 # Model Zoo
 
-##  [CASIA-B](https://ieeexplore.ieee.org/abstract/document/1699873/)
+- [Vanilla Version](#vanilla-version)
+- [Improved Version](#improved-version)
+
+## Vanilla Version
+
+###  [CASIA-B](https://ieeexplore.ieee.org/abstract/document/1699873/)
 |                       Model            |  Pose Estimator             |  Rank-1 NM  |  Rank-1 BG  |  Rank-1 CL  | Rank-1 Mean      |
 | :------------------------------------------------: | :---------: | :---------: | :---------: | :---------: | :------------: |
 |                   [GaitGraph1](https://ieeexplore.ieee.org/document/9506717)              | HRNet     | 86.37 (87.7) | 76.50 (74.8) | 65.24 (66.3) | 76.04 (76.27) |
-| [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)  |HRNet | 80.58 (82.0) | 72.14 (73.2) | 65.26 (63.6) | 72.66 (72.93) |
+| [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)  |HRNet | 80.29 (82.0) | 71.40 (73.2) | 63.80 (63.6) | 71.83 (72.93) |
 |                     [GaitTR](https://arxiv.org/abs/2204.03873)   |        SimCC           |      94.91 (96.0) | 88.82 (91.3) | 90.34 (90.0) | 91.35 (92.4)          |
 [GPGait](https://arxiv.org/abs/2303.05234)   |        HRNet           |      93.60 | 80.15 | 69.29 | 81.01          |
 
 
 
 
-##  [OUMVLP-Pose](https://ieeexplore.ieee.org/abstract/document/9139355/)
+###  [OUMVLP-Pose](https://ieeexplore.ieee.org/abstract/document/9139355/)
 
 |                       Model                      |  Pose Estimator   |  Rank-1 (original format) | Rank-1 (COCO2017 format)  
 | :------------------------------------------------: | :------: | :------: | :------: 
@@ -24,18 +29,18 @@
 
 
 
-##  [GREW](http://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Gait_Recognition_in_the_Wild_A_Benchmark_ICCV_2021_paper.html)
+###  [GREW](http://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Gait_Recognition_in_the_Wild_A_Benchmark_ICCV_2021_paper.html)
 
 |                       Model                       | Pose Estimator  | Rank-1  |
 | :------------------------------------------------:| :-----: | :-----: |
 |                   [GaitGraph1](https://ieeexplore.ieee.org/document/9506717)                  |HRNet |     10.18    |
-|                   [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)                  |HRNet |   34.77    |
+|                   [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)                  |HRNet |   34.78    |
 |                     [GaitTR](https://arxiv.org/abs/2204.03873)                    |HRNet |   48.58   |
 |                     [GPGait](https://arxiv.org/abs/2303.05234)                    |HRNet |   57.04   |
 
 
 
-##  [Gait3D](https://openaccess.thecvf.com/content/CVPR2022/html/Zheng_Gait_Recognition_in_the_Wild_With_Dense_3D_Representations_and_CVPR_2022_paper.html)
+###  [Gait3D](https://openaccess.thecvf.com/content/CVPR2022/html/Zheng_Gait_Recognition_in_the_Wild_With_Dense_3D_Representations_and_CVPR_2022_paper.html)
 
 
 |                       Model                       |Pose Estimator | Rank-1  |
@@ -45,6 +50,47 @@
 |                     [GaitTR](https://arxiv.org/abs/2204.03873)                  | HRNet  |   7.20    |
 |                     [GPGait](https://arxiv.org/abs/2303.05234)                  | HRNet  |   22.40   |
 
+## Improved Version
+
+###  [CASIA-B](https://ieeexplore.ieee.org/abstract/document/1699873/)
+|                       Model            |  Pose Estimator             |  Rank-1 NM  |  Rank-1 BG  |  Rank-1 CL  | Rank-1 Mean      |
+| :------------------------------------------------: | :---------: | :---------: | :---------: | :---------: | ------------ |
+|                   [GaitGraph1](https://ieeexplore.ieee.org/document/9506717)              | HRNet     | 88.47 (87.7) | 77.52 (74.8) | 67.95 (66.3) | 77.98 (76.27) |
+| [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)  |HRNet | 83.60 (82.0) | 72.80 (73.2) | 67.01 (63.6) | 74.47 (72.93) |
+|                     [GaitTR]()   |        SimCC           |      95.02 (96.0) | 90.70 (91.3) | 89.67 (90.0) | 91.80 (92.4)          |
+
+
+
+### [OUMVLP-Pose](https://ieeexplore.ieee.org/abstract/document/9139355/)
+
+|                       Model                      |  Pose Estimator   |  Rank-1 (original format) 
+| :------------------------------------------------: | :------: | :------: 
+|                   [GaitGraph1](https://ieeexplore.ieee.org/document/9506717)                   | AlphaPose| 51.24         
+|                   [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)                  |AlphaPose| 64.53 
+|                     [GaitTR](https://arxiv.org/abs/2204.03873)                     |AlphaPose|   43.61    
+
+
+
+
+
+### [GREW](http://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Gait_Recognition_in_the_Wild_A_Benchmark_ICCV_2021_paper.html)
+
+|                       Model                       | Pose Estimator  | Rank-1  |
+| :------------------------------------------------:| :-----: | :-----: |
+|                   [GaitGraph1](https://ieeexplore.ieee.org/document/9506717)                  |HRNet |     36.08    |
+|                   [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)                  |HRNet |   44.41    |
+|                     [GaitTR](https://arxiv.org/abs/2204.03873)                    |HRNet |   55.33   |
+
+
+
+### [Gait3D](https://openaccess.thecvf.com/content/CVPR2022/html/Zheng_Gait_Recognition_in_the_Wild_With_Dense_3D_Representations_and_CVPR_2022_paper.html)
+
+
+|                       Model                       |Pose Estimator | Rank-1  |
+| :------------------------------------------------:| :-----: | :-----: |
+|                   [GaitGraph1](https://ieeexplore.ieee.org/document/9506717)                  | HRNet |   14.60    |
+|                   [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)                 | HRNet |   12.50      |
+|                     [GaitTR](https://arxiv.org/abs/2204.03873)                  | HRNet  |   9.70    |
 
 
 
