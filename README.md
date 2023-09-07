@@ -105,7 +105,7 @@ You can run commands in [dist_test.sh](dist_test.sh) for testing different model
 * [Implement New Models](docs/implement_new_models.md)
 
 ## Model Zoo
-Results and models are available in the [model zoo](docs/model_zoo.md). [[Google Drive]](https://drive.google.com/drive/folders/1SUsy-AVZLuHcRfaLO_40SEwoqxvecuZI?usp=sharing) [[百度网盘 提取码54mk]](https://pan.baidu.com/s/1cAiqP5tpO3hN5k5KOdUu2g?pwd=54mk)
+Results and models are available in the [model zoo](docs/model_zoo.md). [[Google Drive]](https://drive.google.com/drive/folders/1qn5dW-arxniD6VgMP3EmU0xSfEbh6qUF?usp=sharing) [[百度网盘 提取码s4jj]](https://pan.baidu.com/s/15UUKcqf6LoPBEd3123i-3g?pwd=s4jj)
 
 ## Acknowledgement
 * GaitGraph/GaitGraph2: [Torben Teepe](https://scholar.google.com/citations?user=TWJuTroAAAAJ&hl=zh-CN&oi=sra)
