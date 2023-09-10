@@ -1,13 +1,13 @@
 <div align="center"><img src="resources\logo.png"  alt="logo"  width = "428" height = "250" /></div>
 
 
-**FastPoseGait** is a user-friendly and flexible repository that aims to help researchers get started on **pose-based gait recognition** quickly. Just the pre-beta version is released now, and an enhanced version as well as a technical report will be released as soon as possible.
+**FastPoseGait** is a user-friendly and flexible repository that aims to help researchers get started on **pose-based gait recognition** quickly. 
 This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
 ## News!
-
-* [Aug 2023]  The official PyTorch implementation of <i>GPGait: Generalized Pose-based Gait Recognition</i> is released！Checkout [code](configs/gpgait/README.md).
-* [July 2023] Our paper [GPGait: Generalized Pose-based Gait Recognition](https://arxiv.org/abs/2303.05234) has been accepted by ICCV 2023!
+* [Sep 2023] Our technical report [FastPoseGait: A Toolbox and Benchmark for Efficient Pose-based Gait Recognition](https://arxiv.org/abs/2309.00794) and the code of <i>Improved Version</i> are released! Checkout [Model Zoo](docs/model_zoo.md).
+* [Aug 2023] The official PyTorch implementation of <i>GPGait: Generalized Pose-based Gait Recognition</i> is released！Checkout [code](configs/gpgait/README.md).
+* [July 2023] Our paper [GPGait: Generalized Pose-based Gait Recognition](https://arxiv.org/abs/2303.05234) is accepted by ICCV 2023!
 
 ## Supports
 
@@ -109,7 +109,7 @@ Results and models are available in the [model zoo](docs/model_zoo.md). [[Google
 
 ## Acknowledgement
 * GaitGraph/GaitGraph2: [Torben Teepe](https://scholar.google.com/citations?user=TWJuTroAAAAJ&hl=zh-CN&oi=sra)
-* GaitTR: [Cun Zhang](https://arxiv.org/abs/2204.03873)
+* GaitTR: [Cun Zhang](https://github.com/zhcun)
 * [OpenGait Team](https://github.com/ShiqiYu/OpenGait)
 * [CASIA-B Team](http://www.cbsr.ia.ac.cn/english/Gait%20Databases.asp)
 * [OUMVLP-Pose Team](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitLPPose.html)
@@ -120,14 +120,14 @@ Results and models are available in the [model zoo](docs/model_zoo.md). [[Google
 
 If you find this project useful in your research, please consider citing: 
 ```
-@misc{fastposegait2023,
-  author =       {Shibei Meng, Yang Fu, Saihui Hou, Yongzhen Huang},
-  title =        {FastPoseGait},
-  howpublished = {\url{https://github.com/BNU-IVC/FastPoseGait}},
-  year =         {2023}
+@article{meng2023fastposegait,
+  title={FastPoseGait: A Toolbox and Benchmark for Efficient Pose-based Gait Recognition},
+  author={Meng, Shibei and Fu, Yang and Hou, Saihui and Cao, Chunshui and Liu, Xu and Huang, Yongzhen},
+  journal={arXiv preprint arXiv:2309.00794},
+  year={2023}
 }
 ```
-We will also release a technical report later.
+
 
 **Note**: This code is strictly intended for **academic purposes** and can not be utilized for any form of commercial use.
 
@@ -138,5 +138,5 @@ We build this project based on the open-source project [OpenGait](https://github
 
 We will keep up with the latest progress of the community, and support more popular algorithms and frameworks. We also appreciate all contributions to improve FastPoseGait. If you have any feature requests, please feel free to leave a comment, file an issue or contact the authors:
 
-* ShiBei Meng, mengshibei0208@gmail.com
+* ShiBei Meng, mengshibei@mail.bnu.edu.cn
 * Yang Fu, aleeyanger@gmail.com
