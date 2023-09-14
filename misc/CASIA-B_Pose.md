@@ -23,24 +23,24 @@ The shape of the tensor in one *.pkl file is `[T,V,C]`, where `T` represents the
 The order of 17 keypoints is as follows:
 
 ```
- keypoints = {
-             0: "nose",  
-             1: "neck"
-             2: "Rshoulder"
-             3: "Relbow"
-             4: "Rwrist"
-             5: "Lshoudler"
-             6: "Lelbow"
-             7: "Lwrist"
-             8: "Rhip
-             9: "Rknee"
-             10: "Rankle"
-             11: "Lhip"
-             12: "Lknee"
-             13: "Lankle"
-             14: "Reye"
-             15: "Leye"
-             16: "Rear"
-             17: "Lear"
-         }
+keypoints =
+    {
+        1: "nose",
+        2: "left_eye",
+        3: "right_eye",
+        4: "left_ear",
+        5: "right_ear",
+        6: "left_shoulder",
+        7: "right_shoulder",
+        8: "left_elbow",
+        9: "right_elbow",
+        10: "left_wrist",
+        11: "right_wrist",
+        12: "left_hip",
+        13: "right_hip",
+        14: "left_knee",
+        15: "right_knee",
+        16: "left_ankle",
+        17: "right_ankle"
+    }
 ```
