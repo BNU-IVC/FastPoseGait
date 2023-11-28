@@ -1,4 +1,4 @@
-import logging, numpy as np
+import numpy as np
 
 class Graph():
     """
@@ -10,7 +10,7 @@ class Graph():
         self.dilation = dilation
 
         # get edges
-        self.num_node, self.edge, self.connect_joint, self.parts = self._get_edge()
+        self.num_node, self.edge, self.connect_joint = self._get_edge()
 
         # get adjacency matrix
         self.A = self._get_adjacency()
@@ -48,13 +48,6 @@ class Graph():
             self.center = 0
             self.flip_idx = [0, 2, 1, 4, 3, 6, 5, 8, 7, 10, 9, 12, 11, 14, 13, 16, 15]
             connect_joint = np.array([5,0,0,1,2,0,0,5,6,7,8,5,6,11,12,13,14])
-            parts = [
-                np.array([5, 7, 9]),                      # left_arm
-                np.array([6, 8, 10]),                     # right_arm
-                np.array([11, 13, 15]),                   # left_leg
-                np.array([12, 14, 16]),                   # right_leg
-                np.array([0, 1, 2, 3, 4]),                # head
-            ]
 
         elif self.joint_format == 'coco-no-head':
             num_node = 12
@@ -65,12 +58,6 @@ class Graph():
             self.edge = self_link + neighbor_link
             self.center = 0
             connect_joint = np.array([3,1,0,2,4,0,6,8,10,7,9,11])
-            parts =[
-                np.array([0, 2, 4]),       # left_arm
-                np.array([1, 3, 5]),       # right_arm
-                np.array([6, 8, 10]),      # left_leg
-                np.array([7, 9, 11])       # right_leg
-            ]
 
         elif self.joint_format =='alphapose' or self.joint_format =='openpose':
             num_node = 18
@@ -82,22 +69,13 @@ class Graph():
             self.center = 1
             self.flip_idx = [0, 1, 5, 6, 7, 2, 3, 4, 11, 12, 13, 8, 9, 10, 15, 14, 17, 16]
             connect_joint = np.array([1,1,1,2,3,1,5,6,2,8,9,5,11,12,0,0,14,15])
-            parts = [
-                np.array([5, 6, 7]),               # left_arm
-                np.array([2, 3, 4]),               # right_arm
-                np.array([11, 12, 13]),            # left_leg
-                np.array([8, 9, 10]),              # right_leg
-                np.array([0, 1, 14, 15, 16, 17]),  # head
-            ]
 
         else:
-            num_node, neighbor_link, connect_joint, parts = 0, [], [], []
-            logging.info('')
-            logging.error('Error: Do NOT exist this dataset: {}!'.format(self.dataset))
-            raise ValueError()
+            num_node, neighbor_link, connect_joint = 0, [], []
+            raise ValueError('Error: Do NOT exist this dataset: {}!'.format(self.joint_format))
         self_link = [(i, i) for i in range(num_node)]
         edge = self_link + neighbor_link
-        return num_node, edge, connect_joint, parts
+        return num_node, edge, connect_joint
 
     def _get_hop_distance(self):
         A = np.zeros((self.num_node, self.num_node))

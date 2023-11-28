@@ -1,5 +1,4 @@
 import numpy as np
-import logging
 
 
 class GraphPartition():
@@ -68,8 +67,7 @@ class GraphPartition():
     def __call__(self, part=None):
         if part:
             if not isinstance(part, int):
-                logging.error('Error: give a integer for partition!')
-                raise ValueError()
+                raise ValueError('Error: give a integer for partition!')
             ret_partition = self.partition_list[part]
         else:
             ret_partition = self.partition_list[0]
