@@ -3,7 +3,7 @@ from time import strftime, localtime
 import numpy as np
 from utils import get_msg_mgr, mkdir
 
-from .metric import cuda_dist, compute_ACC_mAP, evaluate_rank
+from .metric import cuda_dist, compute_ACC_mAP, evaluate_rank, evaluate_many
 
 
 
@@ -70,48 +70,57 @@ def cross_view_gallery_evaluation(feature, label, seq_type, view, dataset, metri
 best_res = 0
 def single_view_gallery_evaluation(feature, label, seq_type, view, dataset, metric):
     probe_seq_dict = {'CASIA-B': {'NM': ['nm-05', 'nm-06'], 'BG': ['bg-01', 'bg-02'], 'CL': ['cl-01', 'cl-02']},
-                      'OUMVLP': {'NM': ['00']}}
+                      'OUMVLP': {'NM': ['00']},
+                      'SUSTech1K': {'Normal': ['01-nm'], 'Bag': ['bg'], 'Clothing': ['cl'], 'Carrying':['cr'], 'Umberalla': ['ub'], 'Uniform': ['uf'], 'Occlusion': ['oc'],'Night': ['nt'], 'Overall': ['01','02','03','04']},
+                      }
     gallery_seq_dict = {'CASIA-B': ['nm-01', 'nm-02', 'nm-03', 'nm-04'],
-                        'OUMVLP': ['01']}
+                        'OUMVLP': ['01'],
+                        'SUSTech1K': ['00-nm'],
+                        }
     msg_mgr = get_msg_mgr()
     acc = {}
     view_list = sorted(np.unique(view))
-    view_num = len(view_list)
     num_rank = 1
+    if dataset == 'SUSTech1K':
+        num_rank = 5 
+    view_num = len(view_list)
+
     for (type_, probe_seq) in probe_seq_dict[dataset].items():
-        acc[type_] = np.zeros((view_num, view_num)) - 1.
+        acc[type_] = np.zeros((view_num, view_num, num_rank)) - 1.
         for (v1, probe_view) in enumerate(view_list):
             pseq_mask = np.isin(seq_type, probe_seq) & np.isin(
                 view, probe_view)
+            pseq_mask = pseq_mask if 'SUSTech1K' not in dataset   else np.any(np.asarray(
+                        [np.char.find(seq_type, probe)>=0 for probe in probe_seq]), axis=0
+                            ) & np.isin(view, probe_view) # For SUSTech1K only
             probe_x = feature[pseq_mask, :]
             probe_y = label[pseq_mask]
 
             for (v2, gallery_view) in enumerate(view_list):
                 gseq_mask = np.isin(seq_type, gallery_seq_dict[dataset]) & np.isin(
                     view, [gallery_view])
+                gseq_mask = gseq_mask if 'SUSTech1K' not in dataset  else np.any(np.asarray(
+                            [np.char.find(seq_type, gallery)>=0 for gallery in gallery_seq_dict[dataset]]), axis=0
+                                ) & np.isin(view, [gallery_view]) # For SUSTech1K only
                 gallery_y = label[gseq_mask]
                 gallery_x = feature[gseq_mask, :]
                 dist = cuda_dist(probe_x, gallery_x, metric)
-                idx = dist.cpu().sort(1)[1].numpy()
-                acc[type_][v1, v2] = np.round(np.sum(np.cumsum(np.reshape(probe_y, [-1, 1]) == gallery_y[idx[:, 0:num_rank]], 1) > 0,
+                idx = dist.topk(num_rank, largest=False)[1].cpu().numpy()
+                acc[type_][v1, v2, :] = np.round(np.sum(np.cumsum(np.reshape(probe_y, [-1, 1]) == gallery_y[idx[:, 0:num_rank]], 1) > 0,
                                                      0) * 100 / dist.shape[0], 2)
 
     result_dict = {}
     msg_mgr.log_info('===Rank-1 (Exclude identical-view cases)===')
     out_str = ""
-    global best_res
-    all_res = []
-    for type_ in probe_seq_dict[dataset].keys():
-        sub_acc = de_diag(acc[type_], each_angle=True)
-        msg_mgr.log_info(f'{type_}: {sub_acc}')
-        result_dict[f'scalar/test_accuracy/{type_}'] = np.mean(sub_acc)
-        out_str += f"{type_}: {np.mean(sub_acc):.2f}%\t"
-        all_res.append(np.mean(sub_acc))
-    out_str += f"Mean: {np.mean(all_res):.2f}%\t"
-    if np.mean(all_res) > best_res:
-        best_res = np.mean(all_res)
-    out_str += f"Best: {best_res:.2f}%\t"
-    msg_mgr.log_info(out_str)
+    for rank in range(num_rank):
+        out_str = ""
+        for type_ in probe_seq_dict[dataset].keys():
+            sub_acc = de_diag(acc[type_][:,:,rank], each_angle=True)
+            if rank == 0:
+                msg_mgr.log_info(f'{type_}@R{rank+1}: {sub_acc}')
+                result_dict[f'scalar/test_accuracy/{type_}@R{rank+1}'] = np.mean(sub_acc)
+            out_str += f"{type_}@R{rank+1}: {np.mean(sub_acc):.2f}%\t"
+        msg_mgr.log_info(out_str)
     return result_dict
 
 
@@ -120,7 +129,7 @@ def evaluate_indoor_dataset(data, dataset, metric='euc', cross_view_gallery=Fals
     label = np.array(label)
     view = np.array(view)
 
-    if dataset not in ('CASIA-B', 'OUMVLP'):
+    if dataset not in ('CASIA-B', 'OUMVLP', 'SUSTech1K'):
         raise KeyError("DataSet %s hasn't been supported !" % dataset)
     if cross_view_gallery:
         return cross_view_gallery_evaluation(
@@ -233,3 +242,125 @@ def evaluate_Gait3D(data, conf, metric='euc'):
     # print_csv_format(dataset_name, results)
     msg_mgr.log_info(results)
     return results
+
+
+def evaluate_CCPG(data, dataset, metric='euc'):
+    msg_mgr = get_msg_mgr()
+
+    feature, label, seq_type, view = data['embeddings'], data['labels'], data['types'], data['views']
+
+    label = np.array(label)
+    for i in range(len(view)):
+        view[i] = view[i].split("_")[0]
+    view_np = np.array(view)
+    view_list = list(set(view))
+    view_list.sort()
+
+    view_num = len(view_list)
+
+    probe_seq_dict = {'CCPG': [["U0_D0_BG", "U0_D0"], [
+        "U3_D3"], ["U1_D0"], ["U0_D0_BG"]]}
+
+    gallery_seq_dict = {
+        'CCPG': [["U1_D1", "U2_D2", "U3_D3"], ["U0_D3"], ["U1_D1"], ["U0_D0"]]}
+    if dataset not in (probe_seq_dict or gallery_seq_dict):
+        raise KeyError("DataSet %s hasn't been supported !" % dataset)
+    num_rank = 5
+    acc = np.zeros([len(probe_seq_dict[dataset]),
+                   view_num, view_num, num_rank]) - 1.
+
+    ap_save = []
+    cmc_save = []
+    minp = []
+    for (p, probe_seq) in enumerate(probe_seq_dict[dataset]):
+        # for gallery_seq in gallery_seq_dict[dataset]:
+        gallery_seq = gallery_seq_dict[dataset][p]
+        gseq_mask = np.isin(seq_type, gallery_seq)
+        gallery_x = feature[gseq_mask, :]
+        # print("gallery_x", gallery_x.shape)
+        gallery_y = label[gseq_mask]
+        gallery_view = view_np[gseq_mask]
+
+        pseq_mask = np.isin(seq_type, probe_seq)
+        probe_x = feature[pseq_mask, :]
+        probe_y = label[pseq_mask]
+        probe_view = view_np[pseq_mask]
+
+        msg_mgr.log_info(
+            ("gallery length", len(gallery_y), gallery_seq, "probe length", len(probe_y), probe_seq))
+        distmat = cuda_dist(probe_x, gallery_x, metric).cpu().numpy()
+        # cmc, ap = evaluate(distmat, probe_y, gallery_y, probe_view, gallery_view)
+        cmc, ap, inp = evaluate_many(
+            distmat, probe_y, gallery_y, probe_view, gallery_view)
+        ap_save.append(ap)
+        cmc_save.append(cmc[0])
+        minp.append(inp)
+
+    # print(ap_save, cmc_save)
+
+    msg_mgr.log_info(
+        '===Rank-1 (Exclude identical-view cases for Person Re-Identification)===')
+    msg_mgr.log_info('CL: %.3f,\tUP: %.3f,\tDN: %.3f,\tBG: %.3f' % (
+        cmc_save[0]*100, cmc_save[1]*100, cmc_save[2]*100, cmc_save[3]*100))
+
+    msg_mgr.log_info(
+        '===mAP (Exclude identical-view cases for Person Re-Identification)===')
+    msg_mgr.log_info('CL: %.3f,\tUP: %.3f,\tDN: %.3f,\tBG: %.3f' % (
+        ap_save[0]*100, ap_save[1]*100, ap_save[2]*100, ap_save[3]*100))
+
+    msg_mgr.log_info(
+        '===mINP (Exclude identical-view cases for Person Re-Identification)===')
+    msg_mgr.log_info('CL: %.3f,\tUP: %.3f,\tDN: %.3f,\tBG: %.3f' %
+                     (minp[0]*100, minp[1]*100, minp[2]*100, minp[3]*100))
+
+    for (p, probe_seq) in enumerate(probe_seq_dict[dataset]):
+        # for gallery_seq in gallery_seq_dict[dataset]:
+        gallery_seq = gallery_seq_dict[dataset][p]
+        for (v1, probe_view) in enumerate(view_list):
+            for (v2, gallery_view) in enumerate(view_list):
+                gseq_mask = np.isin(seq_type, gallery_seq) & np.isin(
+                    view, [gallery_view])
+                gallery_x = feature[gseq_mask, :]
+                gallery_y = label[gseq_mask]
+
+                pseq_mask = np.isin(seq_type, probe_seq) & np.isin(
+                    view, [probe_view])
+                probe_x = feature[pseq_mask, :]
+                probe_y = label[pseq_mask]
+
+                dist = cuda_dist(probe_x, gallery_x, metric)
+                idx = dist.sort(1)[1].cpu().numpy()
+                # print(p, v1, v2, "\n")
+                acc[p, v1, v2, :] = np.round(
+                    np.sum(np.cumsum(np.reshape(probe_y, [-1, 1]) == gallery_y[idx[:, 0:num_rank]], 1) > 0,
+                           0) * 100 / dist.shape[0], 2)
+    result_dict = {}
+    for i in range(1):
+        msg_mgr.log_info(
+            '===Rank-%d (Include identical-view cases)===' % (i + 1))
+        msg_mgr.log_info('CL: %.3f,\tUP: %.3f,\tDN: %.3f,\tBG: %.3f' % (
+            np.mean(acc[0, :, :, i]),
+            np.mean(acc[1, :, :, i]),
+            np.mean(acc[2, :, :, i]),
+            np.mean(acc[3, :, :, i])))
+    for i in range(1):
+        msg_mgr.log_info(
+            '===Rank-%d (Exclude identical-view cases)===' % (i + 1))
+        msg_mgr.log_info('CL: %.3f,\tUP: %.3f,\tDN: %.3f,\tBG: %.3f' % (
+            de_diag(acc[0, :, :, i]),
+            de_diag(acc[1, :, :, i]),
+            de_diag(acc[2, :, :, i]),
+            de_diag(acc[3, :, :, i])))
+    result_dict["scalar/test_accuracy/CL"] = acc[0, :, :, i]
+    result_dict["scalar/test_accuracy/UP"] = acc[1, :, :, i]
+    result_dict["scalar/test_accuracy/DN"] = acc[2, :, :, i]
+    result_dict["scalar/test_accuracy/BG"] = acc[3, :, :, i]
+    np.set_printoptions(precision=2, floatmode='fixed')
+    for i in range(1):
+        msg_mgr.log_info(
+            '===Rank-%d of each angle (Exclude identical-view cases)===' % (i + 1))
+        msg_mgr.log_info('CL: {}'.format(de_diag(acc[0, :, :, i], True)))
+        msg_mgr.log_info('UP: {}'.format(de_diag(acc[1, :, :, i], True)))
+        msg_mgr.log_info('DN: {}'.format(de_diag(acc[2, :, :, i], True)))
+        msg_mgr.log_info('BG: {}'.format(de_diag(acc[3, :, :, i], True)))
+    return result_dict

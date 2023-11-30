@@ -1,0 +1,98 @@
+data_cfg:
+  dataset_name: CCPG
+  dataset_root: your_path
+  dataset_partition: ./datasets/CCPG/CCPG.json
+  test_dataset_name: CCPG
+
+  num_workers: 0
+  remove_no_gallery: false
+
+evaluator_cfg:
+  enable_float16: false
+  restore_ckpt_strict: true
+  restore_hint: 40000
+  save_name: gpgait
+  sampler:
+    batch_size: 4 # should be same as num_gpus
+    sample_type: all_ordered
+    type: InferenceSampler
+  metric: euc # cos
+  eval_func: evaluate_CCPG
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: Affine
+        - type: RescaleCenter
+        - type: HOD_MultiInput
+        - type: SkeletonInput
+
+loss_cfg:
+  - loss_term_weight: 1.0
+    margin: 0.3
+    type: TripletLoss
+    log_prefix: triplet
+    is_hard_loss: true
+  - loss_term_weight: 1.0
+    scale: 16
+    type: CrossEntropyLoss
+    log_prefix: softmax
+    log_accuracy: true
+    label_smooth: false
+
+model_cfg:
+  model: gpgait
+  in_channels:
+    - 2 
+    - 64
+    - 64
+    - 128
+    - 256
+  num_class: 100
+  share_num: 3
+
+
+optimizer_cfg:
+  lr: 0.001
+  momentum: 0.9
+  solver: Adam
+  weight_decay: 0.00002
+
+scheduler_cfg:
+  three_phase: True
+  max_lr: 0.002
+  div_factor: 100
+  total_steps: 40000
+  pct_start: 0.5 
+  scheduler: OneCycleLR
+
+trainer_cfg:
+  enable_float16: false #not use
+  log_iter: 100
+  with_test: true
+  restore_ckpt_strict: false
+  restore_hint: 0
+  save_iter: 10000
+  save_name: gpgait
+  sync_BN: true
+  total_iter: 40000
+  sampler:
+    batch_shuffle: false
+    batch_size:
+      - 4
+      - 32
+    frames_num_fixed: 60
+    frames_num_max: 50
+    frames_num_min: 25
+    sample_type: fixed_unordered #Repeat sample
+    frames_skip_num: 0
+    type: TripletSampler
+  transform:
+    - type: Compose
+      trf_cfg:
+        - type: Affine
+        - type: RescaleCenter
+          center: 'neck'
+          scale: 225
+        - type: HOD_MultiInput
+          joint_format: coco
+        - type: SkeletonInput
