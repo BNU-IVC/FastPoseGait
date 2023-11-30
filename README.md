@@ -5,7 +5,8 @@
 This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
 ## News!
-* [Sep 2023] Our technical report [FastPoseGait: A Toolbox and Benchmark for Efficient Pose-based Gait Recognition](https://arxiv.org/abs/2309.00794) and the code of <i>Improved Version</i> are released! Checkout [Model Zoo](docs/model_zoo.md).
+* [Nov 2023] SUSTech1K and CCPG have been supported in our project! The result of GPGait on these two benchmarks can be found in [Model Zoo](docs/model_zoo.md).
+* [Sep 2023] Our technical report [FastPoseGait: A Toolbox and Benchmark for Efficient Pose-based Gait Recognition](https://arxiv.org/abs/2309.00794) and the code of <i>Improved Version</i> are released! Check out [Model Zoo](docs/model_zoo.md).
 * [Aug 2023] The official PyTorch implementation of <i>GPGait: Generalized Pose-based Gait Recognition</i> is released！Checkout [code](configs/gpgait/README.md).
 * [July 2023] Our paper [GPGait: Generalized Pose-based Gait Recognition](https://arxiv.org/abs/2303.05234) is accepted by ICCV 2023! Checkout [paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Fu_GPGait_Generalized_Pose-based_Gait_Recognition_ICCV_2023_paper.pdf), [poster](https://drive.google.com/file/d/196ZGrlKevgMjuXCsQvrbNnzZ6b5mTf3s/view?usp=sharing) and video([bilibili](https://www.bilibili.com/video/BV1tN411b7Qz
 ) [YouTube](https://www.youtube.com/watch?v=NY_MzAxpm94)).
@@ -31,7 +32,9 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 
 - [x] [Gait3D(CVPR2022)](https://openaccess.thecvf.com/content/CVPR2022/html/Zheng_Gait_Recognition_in_the_Wild_With_Dense_3D_Representations_and_CVPR_2022_paper.html)
 
+- [x] [SUSTech1K(CVPR2023)](https://lidargait.github.io/)
 
+- [x] [CCPG(CVPR2023)](https://github.com/BNU-IVC/CCPG)
 
 ## Getting Started
 
@@ -69,6 +72,8 @@ pip install pytorch_metric_learning
   * [OUMVLP-Pose official site](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitLPPose.html)
   * [GREW official site](https://www.grew-benchmark.org/download.html)
   * [Gait3D official site](https://gait3d.github.io/#dataset)
+  * [SUSTech1K official site](https://lidargait.github.io/)
+  * [CCPG official site](https://github.com/BNU-IVC/CCPG)
 * Suppose you have downloaded the official annotations, you need to use our [provided script](docs/process_dataset.md)  to generate the processed pickle files.
 
 
@@ -116,6 +121,8 @@ Results and models are available in the [model zoo](docs/model_zoo.md). [[Google
 * [OUMVLP-Pose Team](http://www.am.sanken.osaka-u.ac.jp/BiometricDB/GaitLPPose.html)
 * [GREW Team](https://www.grew-benchmark.org/download.html)
 * [Gait3D Team](https://gait3d.github.io/#dataset)
+* [SUSTech1K Team](https://lidargait.github.io/)
+* [CCPG Team](https://github.com/BNU-IVC/CCPG)
 
 ## Citation
 
