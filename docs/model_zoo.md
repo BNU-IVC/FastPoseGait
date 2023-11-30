@@ -27,8 +27,6 @@
 
 
 
-
-
 ###  [GREW](http://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Gait_Recognition_in_the_Wild_A_Benchmark_ICCV_2021_paper.html)
 
 |                       Model                       | Pose Estimator  | Rank-1  |
@@ -49,6 +47,25 @@
 |                   [GaitGraph2](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)                 | HRNet |   11.20      |
 |                     [GaitTR](https://arxiv.org/abs/2204.03873)                  | HRNet  |   7.20    |
 |                     [GPGait](https://arxiv.org/abs/2303.05234)                  | HRNet  |   22.40   |
+
+
+
+### [SUSTech1K](https://openaccess.thecvf.com/content/CVPR2023/papers/Shen_LidarGait_Benchmarking_3D_Gait_Recognition_With_Point_Clouds_CVPR_2023_paper.pdf)
+
+| Model  | Pose estimator | Normal |  Bag  | Clothing | Carrying | Umbrella | Uniform | Occlusion | Night | Overall |
+| :----: | :------------: | :----: | :---: | :------: | :------: | :------: | :-----: | :-------: | :---: | :-----: |
+| [GPGait](https://arxiv.org/abs/2303.05234) |    ViTPose     | 49.91  | 46.91 |  33.06   |  45.79   |  40.82   |  51.7   |   66.57   | 30.81 |  47.38  |
+
+
+
+### [CCPG](https://openaccess.thecvf.com/content/CVPR2023/papers/Li_An_In-Depth_Exploration_of_Person_Re-Identification_and_Gait_Recognition_in_CVPR_2023_paper.pdf)
+
+|                                            |                | CL-Full |       | CL-UP  |       | CL-DN  |       |
+| :----------------------------------------: | :------------: | :-----: | :---: | :----: | :---: | :----: | :---: |
+|                   Model                    | Pose estimator | Rank-1  |  mAP  | Rank-1 |  mAP  | Rank-1 |  mAP  |
+| [GPGait](https://arxiv.org/abs/2303.05234) |     HRNet      |  54.75  | 25.78 | 65.60  | 38.44 | 71.06  | 41.04 |
+
+
 
 ## Improved Version
 
