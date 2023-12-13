@@ -14,27 +14,27 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 ## Supports
 
 ### Supported Algorithms
-- [x] [GPGait(ICCV2023)](https://arxiv.org/abs/2303.05234)
+- [x] [GPGait (ICCV 2023)](https://arxiv.org/abs/2303.05234)
 
-- [x] [GaitTR(Arxiv2022)](https://arxiv.org/abs/2204.03873)
+- [x] [GaitTR (Expert-Systems 2022)](https://onlinelibrary.wiley.com/doi/abs/10.1111/exsy.13244)
 
-- [x] [GaitGraph2(CVPRW2022)](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)
+- [x] [GaitGraph2 (CVPRW 2022)](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)
 
-- [x] [GaitGraph1(ICIP2021)](https://ieeexplore.ieee.org/document/9506717)
+- [x] [GaitGraph1 (ICIP 2021)](https://ieeexplore.ieee.org/document/9506717)
 
 ### Supported Datasets
 
-- [x] [CASIA-B(ICPR2006)](https://ieeexplore.ieee.org/abstract/document/1699873/)
+- [x] [CASIA-B (ICPR2006)](https://ieeexplore.ieee.org/abstract/document/1699873/)
 
-- [x] [OUMVLP-Pose(TBIOM2020)](https://ieeexplore.ieee.org/abstract/document/9139355/)
+- [x] [OUMVLP-Pose (TBIOM2020)](https://ieeexplore.ieee.org/abstract/document/9139355/)
 
-- [x] [GREW(ICCV2021)](http://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Gait_Recognition_in_the_Wild_A_Benchmark_ICCV_2021_paper.html)
+- [x] [GREW (ICCV2021)](http://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Gait_Recognition_in_the_Wild_A_Benchmark_ICCV_2021_paper.html)
 
-- [x] [Gait3D(CVPR2022)](https://openaccess.thecvf.com/content/CVPR2022/html/Zheng_Gait_Recognition_in_the_Wild_With_Dense_3D_Representations_and_CVPR_2022_paper.html)
+- [x] [Gait3D (CVPR2022)](https://openaccess.thecvf.com/content/CVPR2022/html/Zheng_Gait_Recognition_in_the_Wild_With_Dense_3D_Representations_and_CVPR_2022_paper.html)
 
-- [x] [SUSTech1K(CVPR2023)](https://lidargait.github.io/)
+- [x] [SUSTech1K (CVPR2023)](https://lidargait.github.io/)
 
-- [x] [CCPG(CVPR2023)](https://github.com/BNU-IVC/CCPG)
+- [x] [CCPG (CVPR2023)](https://github.com/BNU-IVC/CCPG)
 
 ## Getting Started
 
