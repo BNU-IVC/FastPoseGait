@@ -24,17 +24,17 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 
 ### Supported Datasets
 
-- [x] [CASIA-B (ICPR2006)](https://ieeexplore.ieee.org/abstract/document/1699873/)
+- [x] [CASIA-B (ICPR 2006)](https://ieeexplore.ieee.org/abstract/document/1699873/)
 
-- [x] [OUMVLP-Pose (TBIOM2020)](https://ieeexplore.ieee.org/abstract/document/9139355/)
+- [x] [OUMVLP-Pose (TBIOM 2020)](https://ieeexplore.ieee.org/abstract/document/9139355/)
 
-- [x] [GREW (ICCV2021)](http://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Gait_Recognition_in_the_Wild_A_Benchmark_ICCV_2021_paper.html)
+- [x] [GREW (ICCV 2021)](http://openaccess.thecvf.com/content/ICCV2021/html/Zhu_Gait_Recognition_in_the_Wild_A_Benchmark_ICCV_2021_paper.html)
 
-- [x] [Gait3D (CVPR2022)](https://openaccess.thecvf.com/content/CVPR2022/html/Zheng_Gait_Recognition_in_the_Wild_With_Dense_3D_Representations_and_CVPR_2022_paper.html)
+- [x] [Gait3D (CVPR 2022)](https://openaccess.thecvf.com/content/CVPR2022/html/Zheng_Gait_Recognition_in_the_Wild_With_Dense_3D_Representations_and_CVPR_2022_paper.html)
 
-- [x] [SUSTech1K (CVPR2023)](https://lidargait.github.io/)
+- [x] [SUSTech1K (CVPR 2023)](https://lidargait.github.io/)
 
-- [x] [CCPG (CVPR2023)](https://github.com/BNU-IVC/CCPG)
+- [x] [CCPG (CVPR 2023)](https://github.com/BNU-IVC/CCPG)
 
 ## Getting Started
 
