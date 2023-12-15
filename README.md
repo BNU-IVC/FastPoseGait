@@ -9,7 +9,7 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 [![Technical Report](https://img.shields.io/badge/Technical_Report-PDF-red.svg?logo=arXiv&logoColor=red)](https://arxiv.org/abs/2309.00794)
 [![GPGait](https://img.shields.io/badge/GPGait-PDF-red.svg?logo=arXiv&logoColor=red)](https://arxiv.org/abs/2303.05234)
 [![made-with-pytorch](https://img.shields.io/badge/Made%20with-PyTorch-brightgreen)](https://pytorch.org/)
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/meteor/meteor.svg)](http://isitmaintained.com/project/meteor/meteor "Percentage of issues still open")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/BNU-IVC/FastPoseGait.svg)](http://isitmaintained.com/project/BNU-IVC/FastPoseGait "Percentage of issues still open")
 
 </div>
 
