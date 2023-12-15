@@ -4,6 +4,15 @@
 **FastPoseGait** is a user-friendly and flexible repository that aims to help researchers get started on **pose-based gait recognition** quickly. 
 This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and supported in part by [WATRIX.AI](http://www.watrix.ai).
 
+<div align="center">
+ 
+[![Technical Report](https://img.shields.io/badge/Technical_Report-PDF-red.svg?logo=arXiv&logoColor=red)](https://arxiv.org/abs/2309.00794)
+[![GPGait](https://img.shields.io/badge/GPGait-PDF-red.svg?logo=arXiv&logoColor=red)](https://arxiv.org/abs/2303.05234)
+[![made-with-pytorch](https://img.shields.io/badge/Made%20with-PyTorch-brightgreen)](https://pytorch.org/)
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/meteor/meteor.svg)](http://isitmaintained.com/project/meteor/meteor "Percentage of issues still open")
+
+</div>
+
 ## News!
 * [Nov 2023] [SUSTech1K](https://lidargait.github.io/) and [CCPG](https://github.com/BNU-IVC/CCPG) have been supported in our project! The result of GPGait on these two benchmarks can be found in [Model Zoo](docs/model_zoo.md).
 * [Sep 2023] Our technical report [FastPoseGait: A Toolbox and Benchmark for Efficient Pose-based Gait Recognition](https://arxiv.org/abs/2309.00794) and the code of <i>Improved Version</i> are released! Check out [Model Zoo](docs/model_zoo.md).
