@@ -25,7 +25,7 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 ### Supported Algorithms
 - [x] [GPGait (ICCV 2023)](https://arxiv.org/abs/2303.05234)
 
-- [x] [GaitTR (Expert-Systems 2022)](https://onlinelibrary.wiley.com/doi/abs/10.1111/exsy.13244)
+- [x] [GaitTR (Expert-Systems 2023)](https://onlinelibrary.wiley.com/doi/abs/10.1111/exsy.13244)
 
 - [x] [GaitGraph2 (CVPRW 2022)](https://openaccess.thecvf.com/content/CVPR2022W/Biometrics/papers/Teepe_Towards_a_Deeper_Understanding_of_Skeleton-Based_Gait_Recognition_CVPRW_2022_paper)
 
