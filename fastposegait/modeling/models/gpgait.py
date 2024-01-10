@@ -54,7 +54,6 @@ class gpgait(BaseModel):
                 'softmax':{'logits':logits,'labels':labs}
             },
             'visual_summary': {
-                'image/sils': pose.view(N*T, M, V, C)
             },
             'inference_feat': {
                 'embeddings': embed_2
