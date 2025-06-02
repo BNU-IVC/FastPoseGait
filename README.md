@@ -46,6 +46,11 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 
 - [x] [CCPG (CVPR 2023)](https://github.com/BNU-IVC/CCPG)
 
+## TODO
+- [ ] Release the training code of GPGait++
+- [ ] Release the training code of GaitHeat
+- [ ] Release model ckpts
+
 ## Getting Started
 
 ### For the basic usage of FastPoseGait
@@ -62,7 +67,7 @@ cd FastPoseGait
 * pytorch_metric_learning
 
 
-Install the dependencies by pip:
+Install the dependencies with pip:
 ```
 pip install pyyaml tqdm tensorboard pytorch_metric_learning
 pip install torch==1.8 torchvision==0.9
