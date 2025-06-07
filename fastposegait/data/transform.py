@@ -1,8 +1,116 @@
 from data import transform as base_transform
 import numpy as np
 import math
+from math import atan2, degrees, radians, cos, sin
 from utils import is_list, is_dict, get_valid_args
 import torchvision.transforms as T
+
+####  Mean Data Normalization  ####
+class Sequence_level():
+    def __call__(self, data):
+
+        max_v = np.max(data) # [1]
+        min_v = np.min(data) #[1]
+        normalized_data = (data - min_v) / (max_v - min_v) #[T, H, W]
+        
+        return normalized_data
+
+class RotationMat():
+    def __call__(self, data):
+        w = 48
+        h = 64
+        rotation_matrices = []
+        for i in range(len(data)):            
+            down_p = (data[i,11] + data[i,12])/2
+            up_p =  (data[i,5] + data[i,6])/2
+            dx, dy = down_p[0] - up_p[0], down_p[1] - up_p[1]
+            theta = degrees(atan2(dy, dx))
+            angle= -(90-theta)
+            if np.abs(angle)<=5 and random.uniform(0, 1)>0.2:
+                M_cv = np.array([[1, 0, 0],
+                        [0, 1, 0]],dtype=np.float32)
+                M_b = np.array([[1, 0, 0],
+                        [0, 1, 0]],dtype=np.float32)
+                M = np.stack([M_cv, M_b],axis=-1) 
+                rotation_matrices.append(M)
+                continue 
+            center = (down_p+up_p)/2
+            M_cv = cv2.getRotationMatrix2D(center[:2], angle, 1.0)
+            MM = np.concatenate([M_cv,np.array([[0,0,1]])],axis=0)
+            #transform pose
+            new_up_p = affine_transform(M_cv,up_p[:2])
+            T = np.array([[2 / w, 0, -1],
+                        [0, 2 / h, -1],
+                        [0, 0, 1]])
+            M_cv = np.linalg.inv(T @ MM @ np.linalg.inv(T))[:2]
+
+            x_bias = -(new_up_p[0] - 24)
+            y_bias = -(new_up_p[1] - 16)
+            M_b = np.array([[1, 0, x_bias],
+                            [0, 1, y_bias],
+                            [0,0,1]])
+            M_b = np.linalg.inv(T @ M_b @ np.linalg.inv(T))[:2]   
+
+            M = np.stack([M_cv, M_b],axis=-1) # 2,3,2
+            rotation_matrices.append(M)
+        
+        return np.array(rotation_matrices)
+
+def affine_transform(matrix, point):
+    """
+    Apply a 2x3 affine transformation matrix to a 2D point.
+
+    Parameters:
+    matrix (np.array): A 2x3 affine transformation matrix.
+    point (tuple): A tuple (x, y) representing the point to be transformed.
+
+    Returns:
+    np.array: The transformed point as a numpy array.
+    """
+    point = np.array([point[0], point[1], 1])  # Convert to a 3-element array
+    affine_matrix = np.vstack([matrix, [0, 0, 1]])  # Convert to a 3x3 matrix
+    transformed_point = np.dot(affine_matrix, point)  # Apply transformation
+    return transformed_point[:2]
+
+def create_offset_matrix(transformed_point, target_point):
+    """
+    Create a 2x3 affine transformation matrix for the offset from the transformed point to the target point.
+
+    Parameters:
+    transformed_point (np.array): The transformed point.
+    target_point (tuple): The target point to calculate the offset to.
+
+    Returns:
+    np.array: A 2x3 affine transformation matrix for the calculated offset.
+    """
+    offset = np.array(target_point) - transformed_point
+    offset_matrix = np.array([
+        [1, 0, offset[0]],
+        [0, 1, offset[1]]
+    ])
+    return offset_matrix
+
+class AffineMat():
+    def __call__(self, data):
+        rotation_matrices = []
+        for i in range(len(data)):
+            down_p = (data[i,11] + data[i,12])/2 # hip 
+            up_p =  (data[i,5] + data[i,6])/2 # neck
+            dx, dy = down_p[0] - up_p[0], down_p[1] - up_p[1] #spine
+            theta = degrees(atan2(dy, dx)) # angle
+            angle= (theta -90) #rotated angle
+            angle = angle/180*math.pi # theta
+            rotation_M = np.array([[math.cos(angle),math.sin(-angle),0],
+                        [math.sin(angle),math.cos(angle) ,0]]) 
+
+            new_up_p = affine_transform(rotation_M,up_p[:2])
+            new_up_p[0] 
+            offset_M = create_offset_matrix(new_up_p,(24,24))
+            M = np.stack([rotation_M, offset_M],axis=-1) # 2,3,2
+            rotation_matrices.append(M)
+        
+        return np.array(rotation_matrices) # T 2,3,2
+
 
 class NoOperation():
     def __call__(self, x):
