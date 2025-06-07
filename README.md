@@ -48,7 +48,7 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 
 ## TODO
 - [ ] Release the training code of GPGait++
-- [ ] Release the training code of GaitHeat
+- [x] Release the training code of GaitHeat
 - [ ] Release model ckpts
 
 ## Getting Started
