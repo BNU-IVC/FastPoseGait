@@ -11,31 +11,31 @@ class GaitHeat(BaseModel):
 
     def build_network(self, model_cfg):
 
-        model_cfg['backbone_cfg']['type'] = 'ResNet9_1'
+        model_cfg['backbone_cfg']['type'] = 'ResNet9_layer1'
         self.Backbone1 = self.get_backbone(model_cfg['backbone_cfg'])
         self.Backbone1 = SetBlockWrapper(self.Backbone1)
 
-        model_cfg['backbone_cfg']['type'] = 'ResNet9_2'
+        model_cfg['backbone_cfg']['type'] = 'ResNet9_layer2'
         self.Backbone2 = self.get_backbone(model_cfg['backbone_cfg'])
         self.Backbone2 = SetBlockWrapper(self.Backbone2)
 
-        model_cfg['backbone_cfg']['type'] = 'ResNet9_2'
+        model_cfg['backbone_cfg']['type'] = 'ResNet9_layer2'
         self.Backbone2_fusion = self.get_backbone(model_cfg['backbone_cfg'])
         self.Backbone2_fusion = SetBlockWrapper(self.Backbone2_fusion)
 
-        model_cfg['backbone_cfg']['type'] = 'ResNet9_3'
+        model_cfg['backbone_cfg']['type'] = 'ResNet9_layer3'
         self.Backbone3 = self.get_backbone(model_cfg['backbone_cfg'])
         self.Backbone3 = SetBlockWrapper(self.Backbone3)
 
-        model_cfg['backbone_cfg']['type'] = 'ResNet9_3'
+        model_cfg['backbone_cfg']['type'] = 'ResNet9_layer3'
         self.Backbone3_fusion = self.get_backbone(model_cfg['backbone_cfg'])
         self.Backbone3_fusion = SetBlockWrapper(self.Backbone3_fusion)
 
-        model_cfg['backbone_cfg']['type'] = 'ResNet9_4'
+        model_cfg['backbone_cfg']['type'] = 'ResNet9_layer4'
         self.Backbone4 = self.get_backbone(model_cfg['backbone_cfg'])
         self.Backbone4 = SetBlockWrapper(self.Backbone4)
 
-        model_cfg['backbone_cfg']['type'] = 'ResNet9_4'
+        model_cfg['backbone_cfg']['type'] = 'ResNet9_layer4'
         self.Backbone4_fusion = self.get_backbone(model_cfg['backbone_cfg'])
         self.Backbone4_fusion = SetBlockWrapper(self.Backbone4_fusion)
 

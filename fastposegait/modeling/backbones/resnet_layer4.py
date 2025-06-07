@@ -8,7 +8,7 @@ block_map = {'BasicBlock': BasicBlock,
              'Bottleneck': Bottleneck}
 
 
-class ResNet9_4(ResNet):
+class ResNet9_layer4(ResNet):
     def __init__(self, block, channels=[32, 64, 128, 256], in_channel=1, layers=[1, 2, 2, 1], strides=[1, 2, 2, 1], maxpool=True):
         if block in block_map.keys():
             block = block_map[block]
@@ -41,15 +41,7 @@ class ResNet9_4(ResNet):
         return layer
 
     def forward(self, x):
-        # x = self.conv1(x)
-        # x = self.bn1(x)
-        # x = self.relu(x)
-        # if self.maxpool_flag:
-        #     x = self.maxpool(x)
 
-        # x = self.layer1(x)
-        # x = self.layer2(x)
-        # x = self.layer3(x)
         x = self.layer4(x)
         return x
 

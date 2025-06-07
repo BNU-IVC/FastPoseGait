@@ -5,23 +5,15 @@ from math import atan2, degrees, radians, cos, sin
 from utils import is_list, is_dict, get_valid_args
 import torchvision.transforms as T
 
-############################  ---START--- add by fuyang  ---START---  ############################
-
-# to balance the distrubution for each image
 ####  Mean Data Normalization  ####
 class Sequence_level():
     def __call__(self, data):
 
         max_v = np.max(data) # [1]
         min_v = np.min(data) #[1]
-        # 进行均值归一化
         normalized_data = (data - min_v) / (max_v - min_v) #[T, H, W]
         
         return normalized_data
-
-# to generate the rotation matrix
-#### angle: spine (composed by neck and hip)
-#### center: neck
 
 class RotationMat():
     def __call__(self, data):
@@ -41,7 +33,7 @@ class RotationMat():
                         [0, 1, 0]],dtype=np.float32)
                 M = np.stack([M_cv, M_b],axis=-1) 
                 rotation_matrices.append(M)
-                continue #next frame
+                continue 
             center = (down_p+up_p)/2
             M_cv = cv2.getRotationMatrix2D(center[:2], angle, 1.0)
             MM = np.concatenate([M_cv,np.array([[0,0,1]])],axis=0)
@@ -64,15 +56,6 @@ class RotationMat():
         
         return np.array(rotation_matrices)
 
-
-
-# to generate the rotation matrix and alignment
-##==> First
-#### angle: spine (composed by neck and hip)
-#### center: neck
-##==> Second
-#### apply the rotation mat to pose
-#### new bias to neck point
 def affine_transform(matrix, point):
     """
     Apply a 2x3 affine transformation matrix to a 2D point.
@@ -119,10 +102,7 @@ class AffineMat():
             angle = angle/180*math.pi # theta
             rotation_M = np.array([[math.cos(angle),math.sin(-angle),0],
                         [math.sin(angle),math.cos(angle) ,0]]) 
-            ##apply the M to neck
-            ## fixed neck point (24,24)
-            ## bias neck - (24,24)
-            
+
             new_up_p = affine_transform(rotation_M,up_p[:2])
             new_up_p[0] 
             offset_M = create_offset_matrix(new_up_p,(24,24))
@@ -130,8 +110,6 @@ class AffineMat():
             rotation_matrices.append(M)
         
         return np.array(rotation_matrices) # T 2,3,2
-
-############################  ----END --- add by fuyang ----END ---  ############################
 
 
 class NoOperation():
