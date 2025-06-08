@@ -1,7 +1,7 @@
 from torch.nn import functional as F
 import torch.nn as nn
 from torchvision.models.resnet import BasicBlock, Bottleneck, ResNet
-from ..modules import BasicConv2d
+from ..components.blocks import BasicConv2d
 
 
 block_map = {'BasicBlock': BasicBlock,

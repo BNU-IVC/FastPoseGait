@@ -1,7 +1,8 @@
 import torch
 
 from ..base_model import BaseModel
-from ..modules import SetBlockWrapper, HorizontalPoolingPyramid, PackSequenceWrapper, SeparateFCs, SeparateBNNecks
+from ..components import SeparateBNNecks, SeparateFCs, PackSequenceWrapper, SetBlockWrapper, HorizontalPoolingPyramid
+
 from torch.nn import functional as F
 import torch.nn as nn
 

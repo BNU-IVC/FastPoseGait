@@ -1,12 +1,10 @@
 from torch.nn import functional as F
 import torch.nn as nn
 from torchvision.models.resnet import BasicBlock, Bottleneck, ResNet
-from ..modules import BasicConv2d
-
+from ..components.blocks import BasicConv2d
 
 block_map = {'BasicBlock': BasicBlock,
              'Bottleneck': Bottleneck}
-
 
 class ResNet9(ResNet):
     def __init__(self, block, channels=[32, 64, 128, 256], in_channel=1, layers=[1, 2, 2, 1], strides=[1, 2, 2, 1], maxpool=True):

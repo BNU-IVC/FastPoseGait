@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import logging
-from .units import UnitConv2D, STModule,PAGCN
+from .units import UnitConv2D, STModule, PAGCN, PAGCN_Plus
 from .units.unit_tcn import Temporal_Basic_Block, Temporal_Bottleneck_Block
 from .units.unit_sgcn import Spatial_Basic_Block, Spatial_Bottleneck_Block
 
@@ -116,4 +116,48 @@ class Part_AGCN_Residual(nn.Module):
 
     def forward(self, x, A, part=None):
         x = self.asg(x, A, part) + self.residual_s(x)
+        return x
+
+
+class Part_AGCN_TCN(nn.Module):
+    def __init__(self, in_channels, out_channels, A, joint_format='coco', mask=True):
+        super(Part_AGCN_TCN,self).__init__()
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+        self.A = A
+        self.mask=mask
+        out_asg = out_channels // 2
+        out_res = out_channels - out_asg
+        out_tcn = out_channels // 3 + 1
+        out_res_s = out_channels // 3
+        out_down = out_channels - out_res_s - out_tcn
+        self.asg = PAGCN_Plus(in_channels=self.in_channels,out_channels=out_asg,A=self.A,joint_format=joint_format)
+        self.tcn = UnitConv2D(D_in=self.out_channels, D_out=out_tcn, kernel_size=9)
+
+        self.residual = nn.Sequential(
+                nn.Conv2d(in_channels, out_res, 1),
+                nn.BatchNorm2d(out_res),
+            )
+        self.residual_s = nn.Sequential(
+                nn.Conv2d(self.out_channels, out_res_s, 1),
+                nn.BatchNorm2d(out_res_s),
+            )
+        self.down = UnitConv2D(D_in=self.in_channels, D_out=out_down, kernel_size=1, dropout=0)
+
+    def forward(self, x, A, part=None):
+        if not self.mask:
+            part = None
+        x0 = torch.cat([self.asg(x, A, part), self.residual(x)], dim=1)
+        y = torch.cat([self.tcn(x0), self.residual_s(x0), self.down(x)], dim=1)
+        return y
+
+
+class BasicConv2d(nn.Module):
+    def __init__(self, in_channels, out_channels, kernel_size, stride, padding, **kwargs):
+        super(BasicConv2d, self).__init__()
+        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size,
+                              stride=stride, padding=padding, bias=False, **kwargs)
+
+    def forward(self, x):
+        x = self.conv(x)
         return x

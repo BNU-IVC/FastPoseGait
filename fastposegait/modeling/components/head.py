@@ -111,3 +111,46 @@ class SeparateBNNecks(nn.Module):
         else:
             logits = feature.matmul(self.fc_bin)
         return feature.permute(1, 2, 0).contiguous(), logits.permute(1, 2, 0).contiguous()
+
+
+class SetBlockWrapper(nn.Module):
+    def __init__(self, forward_block):
+        super(SetBlockWrapper, self).__init__()
+        self.forward_block = forward_block
+
+    def forward(self, x, *args, **kwargs):
+        """
+            In  x: [n, c_in, s, h_in, w_in]
+            Out x: [n, c_out, s, h_out, w_out]
+        """
+        n, c, s, h, w = x.size()
+        x = self.forward_block(x.transpose(
+            1, 2).reshape(-1, c, h, w), *args, **kwargs)
+        output_size = x.size()
+        return x.reshape(n, s, *output_size[1:]).transpose(1, 2).contiguous()
+
+
+class HorizontalPoolingPyramid():
+    """
+        Horizontal Pyramid Matching for Person Re-identification
+        Arxiv: https://arxiv.org/abs/1804.05275
+        Github: https://github.com/SHI-Labs/Horizontal-Pyramid-Matching
+    """
+
+    def __init__(self, bin_num=None):
+        if bin_num is None:
+            bin_num = [16, 8, 4, 2, 1]
+        self.bin_num = bin_num
+
+    def __call__(self, x):
+        """
+            x  : [n, c, h, w]
+            ret: [n, c, p] 
+        """
+        n, c = x.size()[:2]
+        features = []
+        for b in self.bin_num:
+            z = x.view(n, c, b, -1)
+            z = z.mean(-1) + z.max(-1)[0]
+            features.append(z)
+        return torch.cat(features, -1)
