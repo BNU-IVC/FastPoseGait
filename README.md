@@ -14,7 +14,7 @@ This repository is provided by [BNU-IVC](https://github.com/BNU-IVC) and support
 </div>
 
 ## News!
-* [Jun 2025] 🔥🔥🔥 Our paper [From FastPoseGait to GPGait++: Bridging the Past and Future for Pose-based Gait Recognition]() is accepted by **TPAMI 2025**! Checkout [paper](https://ieeexplore.ieee.org/document/11029177) and [code](https://github.com/BNU-IVC/FastPoseGait/tree/main/configs/gpgait++).
+* [Jun 2025] 🔥🔥🔥 Our paper [From FastPoseGait to GPGait++: Bridging the Past and Future for Pose-based Gait Recognition](https://ieeexplore.ieee.org/document/11029177) is accepted by **TPAMI 2025**! Checkout [paper](https://ieeexplore.ieee.org/document/11029177) and [code](https://github.com/BNU-IVC/FastPoseGait/tree/main/configs/gpgait++).
 * [Jul 2024] 🔥🔥🔥 Our paper [Cut out the Middleman: Revisiting Pose-based Gait Recognition](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/04501.pdf) is accepted by **ECCV 2024**! Checkout [paper](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/04501.pdf) and [code](https://github.com/BNU-IVC/FastPoseGait/tree/main/configs/gaitheat).
 * [Nov 2023] [SUSTech1K](https://lidargait.github.io/) and [CCPG](https://github.com/BNU-IVC/CCPG) have been supported in our project! The result of GPGait on these two benchmarks can be found in [Model Zoo](docs/model_zoo.md).
 * [Sep 2023] Our technical report [FastPoseGait: A Toolbox and Benchmark for Efficient Pose-based Gait Recognition](https://arxiv.org/abs/2309.00794) and the code of <i>Improved Version</i> are released! Check out [Model Zoo](docs/model_zoo.md).
