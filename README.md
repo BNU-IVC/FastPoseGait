@@ -126,7 +126,7 @@ You can run commands in [dist_test.sh](dist_test.sh) for testing different model
 * [Implement New Models](docs/implement_new_models.md)
 
 ## Model Zoo
-Results and models are available in the [model zoo](docs/model_zoo.md). [[Google Drive]](https://drive.google.com/drive/folders/1jsQ5cZcZ5YXVvzSvyEETlN6l1B7T6paD?usp=drive_link) [[百度网盘 提取码s4jj]](https://pan.baidu.com/s/15UUKcqf6LoPBEd3123i-3g?pwd=s4jj)
+Results and models are available in the [model zoo](docs/model_zoo.md). [[Huggingface]](https://huggingface.co/aleeyanger/gpgait) [[百度网盘 提取码s4jj]](https://pan.baidu.com/s/15UUKcqf6LoPBEd3123i-3g?pwd=s4jj)
 
 Models of **GPGait++** can be downloaded in [[Google Drive]](https://drive.google.com/drive/folders/1NjY0gK89aXO4lFM_YyDiE336njNctHOI?usp=sharing) [[百度网盘 提取码6p68]](https://pan.baidu.com/s/1oSX6rBwQ9Yob7VjSfePjRQ?pwd=6p68)
 
